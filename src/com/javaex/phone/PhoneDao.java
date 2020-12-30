@@ -77,8 +77,6 @@ public class PhoneDao {
 			// 3. SQL문 준비 / 바인딩 / 실행
 			String query = " insert into person values(seq_person_id.nextval, ?, ?, ?) ";
 
-			System.out.println(query);
-
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, PhoneVo.getName());
 			pstmt.setString(2, PhoneVo.getHp());
@@ -115,7 +113,6 @@ public class PhoneDao {
 					 query += " hp = ?, ";
 					 query += " company = ? ";
 					 query += " where person_id = ? ";
-			System.out.println(query);
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, phoneVo.getName());
@@ -149,7 +146,6 @@ public class PhoneDao {
 		try {
 			// 3. SQL문 준비 / 바인딩 / 실행
 			String query = " delete from person where person_id = ? ";
-			System.out.println(query);
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, personId);
@@ -178,7 +174,6 @@ public class PhoneDao {
 		try {
 			// 3. SQL문 준비 / 바인딩 / 실행
 			String query = " select person_id, name, hp, company from person ";
-			System.out.println(query);
 
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();

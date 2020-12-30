@@ -7,7 +7,7 @@ public class PhoneApp {
 
 	public static void main(String[] args) {
 		
-		int num, unum;
+		int num, num2;
 		String name, hp, company;
 		
 		PhoneDao phoneDao = new PhoneDao();
@@ -75,7 +75,9 @@ public class PhoneApp {
 					PhoneVo vo = phoneList.get(i);
 					System.out.println(vo.getPhoneId() + ", " + vo.getName()+ ", " + vo.getHp() + ", " + vo.getCompany());
 				}
+				
 				System.out.println("");
+				
 			} else if(num == 2) {
 				System.out.println("<2.등록>");
 				
@@ -83,7 +85,7 @@ public class PhoneApp {
 				name = sc.next();
 				System.out.print(">핸드폰: ");
 				hp = sc.next(); 
-				System.out.print(">회사: ");
+				System.out.print(">회사번호: ");
 				company = sc.next();
 				
 				PhoneVo phoneVo = new PhoneVo(name, hp, company);
@@ -94,10 +96,31 @@ public class PhoneApp {
 			} else if(num == 3) {
 				System.out.println("<3.수정>");
 				
-				System.out.println(">번호: ");
-				unum = sc.nextInt();
+				System.out.print(">번호: ");
+				num2 = sc.nextInt();
 				sc.nextLine();
+				System.out.print(">이름: ");
+				name = sc.next();
+				System.out.print(">핸드폰: ");
+				hp = sc.next();
+				System.out.print(">회사번호: ");
+				company = sc.next();
 				
+				PhoneVo pupVo = new PhoneVo(num2, name, hp, company);
+				phoneDao.personUpdate(pupVo);
+				
+				System.out.println("");
+				
+			} else if(num == 4) {
+				System.out.println("<4.삭제>");
+				
+				System.out.print(">번호: ");
+				num2 = sc.nextInt();
+				sc.next();
+				
+				phoneDao.phoneDelete(num2);
+				
+				System.out.println("");
 				
 			}
 			
