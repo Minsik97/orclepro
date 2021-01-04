@@ -164,7 +164,8 @@ public class PhoneDao {
 		return count;
 
 	}
-
+	
+	//리스트
 	public List<PhoneVo> getPersonList() {
 		List<PhoneVo> personList = new ArrayList<PhoneVo>();
 
@@ -198,5 +199,59 @@ public class PhoneDao {
 		return personList;
 
 	}
+	
+	
+	//찾기
+	
+	public List<PhoneVo> psList(String search) {
+	List<PhoneVo> psList = new ArrayList<PhoneVo>();
+	
+		
+		//DB접속
+		getConnection();
+		
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = "";
+					 query += " select person_id, ";
+					 query += " 			name, ";
+					 query += " 			hp, ";
+					 query += " 			company ";
+					 query += " from person ";
+					 query += " where name like ? ";
+					 query += " or hp like ? ";
+					 query += " or company like ? ";
+					 
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(3, "%" + search + "%");
+			rs = pstmt.executeQuery();
+
+			
+
+			// 4.결과처리
+			while(rs.next()) {
+				int phoneId = rs.getInt(1);
+				String name = rs.getString(2);
+				String hp = rs.getString(3);
+				String company = rs.getString(4);
+				
+				PhoneVo vo = new PhoneVo(phoneId, name, hp, company);
+				psList.add(vo);
+				
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		// 자원정리
+		close();
+
+		return psList;
+		
+		
+	}
+	
 
 }
